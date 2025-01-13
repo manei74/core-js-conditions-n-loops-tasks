@@ -21,8 +21,9 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) return true;
+  return false;
 }
 
 /**
@@ -38,8 +39,13 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) return a;
+  if (a > b && a < c) return c;
+  if (b > a && b > c) return b;
+  if (b > a && b < c) return c;
+  if (c > a && c < b) return b;
+  return a;
 }
 
 /**
@@ -60,8 +66,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x) return true;
+  if (queen.y === king.y) return true;
+  if (queen.y === queen.x && king.y === king.x) return true;
+  if (queen.y + queen.x === king.y + king.x) return true;
+  return false;
 }
 
 /**
@@ -82,8 +92,12 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === 0 || b === 0 || c === 0) return false;
+  if (a === b && a + b > c) return true;
+  if (a === c && a + c > b) return true;
+  if (c === b && c + b > a) return true;
+  return false;
 }
 
 /**
@@ -100,8 +114,34 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const ed = num % 10;
+  const tens = Math.floor(num / 10) % 10;
+  let final = '';
+  let result = '';
+  if (ed > 0 && ed < 4) {
+    let count = 0;
+    while (count < ed) {
+      result += 'I';
+      count += 1;
+    }
+  }
+  if (ed === 4) result = 'IV';
+  if (ed === 5) result = 'V';
+  if (ed > 5 && ed < 9) {
+    let count = 0;
+    result = 'V';
+    while (count < ed - 5) {
+      result += 'I';
+      count += 1;
+    }
+  }
+  if (ed === 9) result = 'IX';
+  if (tens === 1) final += 'X';
+  if (tens === 2) final += 'XX';
+  if (tens === 3) final += 'XXX';
+  final += result;
+  return final;
 }
 
 /**
